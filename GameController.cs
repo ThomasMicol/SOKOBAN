@@ -5,9 +5,11 @@ public class GameController
     protected IView view;
     protected Level level;
     protected IFileHandler fileHandler;
+    protected bool isPlaying;
 
     public GameController(IView aView)
     {
+        isPlaying = false;
         view = aView;
     }
 

@@ -10,7 +10,4 @@ public interface IView
     void SoundPlayerStruckItem(Entity entity);
     void OnKeyPress(object sender, Event e);
 
-
-
-
 }

@@ -4,11 +4,12 @@ public class GameController
 {
     protected IView view;
     protected Level level;
-    protected IFileHandler fileHandler;
+    protected IFileHandlerAdapter fileHandlerAdapter;
     protected bool isPlaying;
 
     public GameController(IView aView)
     {
+        fileHandlerAdapter = new FileHandlerAdapter();
         isPlaying = false;
         view = aView;
     }

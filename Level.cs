@@ -8,8 +8,32 @@ public class Level
     protected MoveRecorder moveRecorder;
 
 
-    public Level()
+    public void SetMapDimensions(int width, int height)
     {
+        rowWidth = width;
+        columnHeight = height;
+
+    }
+
+    public void SetMoveRecorder(IMoveRecorder aMoveRecorder)
+    {
+        moveRecorder = aMoveRecorder;
+    }
+
+    public void AddEntityToLevelData(Entity anEntity)
+    {
+        levelData.add(anEntity);
+    }
+
+    public bool CheckLevelDataLength()
+    {
+        if(levelData.length === (rowWidth * columnHeight))
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
 
     }
 

@@ -2,8 +2,8 @@
 
 public class GameController
 {
-    protected IView view;
-    protected Level level;
+    protected IView theView;
+    protected Level theLevel;
     protected IFileHandlerAdapter fileHandlerAdapter;
     protected bool isPlaying;
 
@@ -11,27 +11,73 @@ public class GameController
     {
         fileHandlerAdapter = new FileHandlerAdapter();
         isPlaying = false;
-        view = aView;
+        theView = aView;
     }
 
     public void StartNewGame()
     {
-        throw new NotImplementedException("StartNewGame not implemented");
+        if(CheckLevelReady())
+        {
+            isPlaying = true;
+            theLevel.SetMoveRecorder(new MoveRecorder());
+        }
     }
 
-    public void LoadLevel()
+    public void StartGameFromLastState()
     {
-        throw new NotImplementedException("Load Level has yet to be implemented");
+        if(CheckLevelReady())
+        {
+            isPlaying = true;
+        }
     }
 
-    public void LevelComplete()
+    public void SaveLevelState()
     {
-        throw new NotImplementedException("levelComplete not implemented");
+        if(fileHandlerAdapter.sendLevel(theLevel))
+        {
+            theView.DisplaySystemMessage("Level Saved Correctly");
+        }
+        else
+        {
+            theView.ErrorMessage("Level Save Failed");
+        }
     }
 
-    protected void SaveGame()
+    public void LoadLevel(string filePath)
     {
-        throw new NotImplementedException("save has not been implemented");
+        theLevel = fileHandlerAdapter.requestLevel(filePath);
+    }
+
+    public void MovePlayer(Directions aDir)
+    {
+        theLevel.MovePlayer(aDir);
+        theView.Redraw();
+    }
+
+    public void UndoMove()
+    {
+        theLevel.UndoMove();
+        theView.Redraw();
+    }
+
+    public void RedoMove()
+    {
+        theLevel.RedoMove();
+        theView.Redraw();
+    }
+
+    protected bool CheckLevelReady()
+    {
+        if(theLevel.CheckLevelDataLength())
+        {
+            return true;
+        }
+        else
+        {
+            theView.ErrorMessage("The level save is corrupt");
+            theLevel = null;
+            return false;
+        }
     }
 
 

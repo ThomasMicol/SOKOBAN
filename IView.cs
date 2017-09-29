@@ -9,5 +9,9 @@ public interface IView
     void DisplayWinScreen();
     void SoundPlayerStruckItem(Entity entity);
     void OnKeyPress(object sender, Event e);
+    void ErrorMessage(string errorMessage);
+    void DisplaySystemMessage(string message);
+    void Redraw();
+
 
 }

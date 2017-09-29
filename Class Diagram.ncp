@@ -40,8 +40,8 @@
       <Entity type="Class">
         <Name>GameController</Name>
         <Access>Public</Access>
-        <Location left="385" top="519" />
-        <Size width="340" height="230" />
+        <Location left="403" top="502" />
+        <Size width="340" height="298" />
         <Collapsed>False</Collapsed>
         <Member type="Field">IView aView</Member>
         <Member type="Field">Level aLevel</Member>
@@ -50,8 +50,12 @@
         <Member type="Constructor">public GameController(IView theView)</Member>
         <Member type="Method">public void StartNewGame()</Member>
         <Member type="Method">public void StartGameFromLastState()</Member>
-        <Member type="Method">public void LoadInLevel(String filepath)</Member>
         <Member type="Method">public void SaveLevelState()</Member>
+        <Member type="Method">public void LoadLevel(String filepath)</Member>
+        <Member type="Method">public void MovePlayer(Directions aDir)</Member>
+        <Member type="Method">public void UndoMove()</Member>
+        <Member type="Method">public void RedoMove()</Member>
+        <Member type="Method">private bool CheckLevelReady()</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -104,15 +108,16 @@
       <Entity type="Class">
         <Name>Level</Name>
         <Access>Public</Access>
-        <Location left="830" top="519" />
-        <Size width="320" height="264" />
+        <Location left="829" top="518" />
+        <Size width="320" height="281" />
         <Collapsed>False</Collapsed>
         <Member type="Field">int Id</Member>
+        <Member type="Field">int moveNumber</Member>
         <Member type="Field">int rowWidth</Member>
-        <Member type="Field">int columnCount</Member>
+        <Member type="Field">int colummHeight</Member>
         <Member type="Field">bool complete</Member>
         <Member type="Field">Entity[] levelData</Member>
-        <Member type="Field">MoveRecorder moveRecorder</Member>
+        <Member type="Field">IMoveRecorder moveRecorder</Member>
         <Member type="Method">public void SetMapDimensions(int width, int height)</Member>
         <Member type="Method">public void SetMoveRecorder(IMoveRecorder aMoveRecorder)</Member>
         <Member type="Method">public void AddEntityToLevelData(Entity anEntity)</Member>
@@ -145,9 +150,10 @@
         <Name>IMoveRecorder</Name>
         <Access>Public</Access>
         <Location left="852" top="316" />
-        <Size width="258" height="125" />
+        <Size width="278" height="129" />
         <Collapsed>False</Collapsed>
-        <Member type="Method">Movement GetLastMovement()</Member>
+        <Member type="Method">Movement GetLastMovement(int moveNumber)</Member>
+        <Member type="Method">Movement GetNextMove(int moveNumber)</Member>
         <Member type="Method">List&lt;Movement&gt; GetMoveHistory()</Member>
         <Member type="Method">void AddNewMovement(Movement aMove)</Member>
       </Entity>
@@ -157,6 +163,8 @@
         <Location left="894" top="906" />
         <Size width="219" height="216" />
         <Collapsed>False</Collapsed>
+        <Member type="Field">int entityId</Member>
+        <Member type="Field">protected Location myLocation</Member>
         <Member type="Method">public void SetTile(Location aLocation)</Member>
         <Modifier>None</Modifier>
       </Entity>
@@ -167,7 +175,7 @@
         <Size width="246" height="205" />
         <Collapsed>False</Collapsed>
         <Member type="Method">public void MoveInDirection(Directions aDir)</Member>
-        <Member type="Method">public void NewMethod()</Member>
+        <Member type="Method">protected bool CheckNextPosition(Location targetLocation)</Member>
         <Modifier>None</Modifier>
       </Entity>
       <Entity type="Class">
@@ -242,8 +250,8 @@
           <Y>460</Y>
         </BendPoint>
         <BendPoint relativeToStartShape="False">
-          <X>319</X>
-          <Y>649</Y>
+          <X>337</X>
+          <Y>632</Y>
         </BendPoint>
       </Relationship>
       <Relationship type="Dependency" first="2" second="0">
@@ -345,6 +353,14 @@
         <EndOrientation>Vertical</EndOrientation>
         <Direction>Unidirectional</Direction>
         <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Aggregation</AssociationType>
       </Relationship>
     </Relationships>
   </ProjectItem>

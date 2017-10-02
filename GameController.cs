@@ -33,7 +33,7 @@ public class GameController
 
     public void SaveLevelState()
     {
-        if(fileHandlerAdapter.sendLevel(theLevel))
+        if(fileHandlerAdapter.SendLevel(theLevel))
         {
             theView.DisplaySystemMessage("Level Saved Correctly");
         }
@@ -45,7 +45,7 @@ public class GameController
 
     public void LoadLevel(string filePath)
     {
-        theLevel = fileHandlerAdapter.requestLevel(filePath);
+        theLevel = fileHandlerAdapter.RequestLevel(filePath);
     }
 
     public void MovePlayer(Directions aDir)
@@ -64,6 +64,11 @@ public class GameController
     {
         theLevel.RedoMove();
         theView.Redraw();
+    }
+
+    public bool CheckLevelComplete()
+    {
+        return theLevel.IsComplete();
     }
 
     protected bool CheckLevelReady()

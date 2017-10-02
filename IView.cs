@@ -8,7 +8,7 @@ public interface IView
     void DisplayPlayerStructItem(Entity entity);
     void DisplayWinScreen();
     void SoundPlayerStruckItem(Entity entity);
-    void OnKeyPress(object sender, Event e);
+    void OnKeyPress(object sender);
     void ErrorMessage(string errorMessage);
     void DisplaySystemMessage(string message);
     void Redraw();

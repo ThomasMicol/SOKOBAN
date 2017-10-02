@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public interface IFileHander
+public interface IFileHandler
 {
     object GetLevel(int targetId);
     void SaveState(List<int> moveHistory);

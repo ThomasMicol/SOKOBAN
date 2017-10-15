@@ -12,6 +12,7 @@ public class GameController
         fileHandlerAdapter = new FileHandlerAdapter();
         isPlaying = false;
         theView = aView;
+        theView.DisplayMenu();
     }
 
     public void StartNewGame()
@@ -39,7 +40,7 @@ public class GameController
         }
         else
         {
-            theView.ErrorMessage("Level Save Failed");
+            theView.DisplaySystemMessage("Level Save Failed");
         }
     }
 
@@ -79,7 +80,7 @@ public class GameController
         }
         else
         {
-            theView.ErrorMessage("The level save is corrupt");
+            theView.DisplaySystemMessage("The level save is corrupt");
             theLevel = null;
             return false;
         }

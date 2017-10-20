@@ -4,7 +4,6 @@ public interface IView
     void RedrawLevel();
     void DrawGameControls();
     void DisplaySystemMessage(string msg);
-
-
-
+    void PlayWinningSound();
+    void ClearForm();
 }

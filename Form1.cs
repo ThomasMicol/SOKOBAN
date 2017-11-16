@@ -266,7 +266,7 @@ namespace Assignment1___Thomas_Micol
 
         public void DisplaySystemMessage(string msg)
         {
-
+            Console.WriteLine(msg);
         }
 
         public void PlayWinningSound()
@@ -285,7 +285,6 @@ namespace Assignment1___Thomas_Micol
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void NewGame_Click(object sender, EventArgs e)

@@ -60,7 +60,7 @@ public class Level
 
     public void MovePlayer(Directions aDir)
     {
-        moveRecorder.AddNewMove(levelData);
+        moveRecorder.AddNewMove(moveNumber, levelData);
         IEntity player = levelData[0];
         IEntity entityWhereImMovingTo = GetEntityAt(FindTargetLocation(player, aDir));
         Location playerLocation = new Location(player.GetLocation().x, player.GetLocation().y);
@@ -137,7 +137,9 @@ public class Level
     {
         if(moveNumber < maxMoveNumber)
         {
-            levelData = moveRecorder.GetLastMove(moveNumber);
+            List<IEntity> data = moveRecorder.GetNextMove(moveNumber);
+            levelData = null;
+            levelData = data;
             moveNumber++;
         }
         

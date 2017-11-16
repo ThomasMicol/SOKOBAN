@@ -10,7 +10,6 @@ public class Level
     protected bool complete;
     protected List<IEntity> levelData = new List<IEntity>();
     protected IMoveRecorder moveRecorder;
-    private int arrayAccession;
 
 
     public void SetMapDimensions(int width, int height)
@@ -18,7 +17,6 @@ public class Level
         rowWidth = width;
         columnHeight = height;
         int projectedEntityCount = (rowWidth * columnHeight);
-        arrayAccession = 0;
 
     }
 

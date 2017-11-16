@@ -60,13 +60,14 @@ public class Level
 
     public void MovePlayer(Directions aDir)
     {
+        moveRecorder.AddNewMove(levelData);
         IEntity player = levelData[0];
         IEntity entityWhereImMovingTo = GetEntityAt(FindTargetLocation(player, aDir));
         Location playerLocation = new Location(player.GetLocation().x, player.GetLocation().y);
         if (entityWhereImMovingTo != null)
         {
             Location entityLocation = new Location(entityWhereImMovingTo.GetLocation().x, entityWhereImMovingTo.GetLocation().y);
-            moveRecorder.AddNewMove(new Movement(playerLocation, entityLocation));
+            
             if(moveNumber == maxMoveNumber)
             {
                 moveNumber++;
@@ -95,9 +96,11 @@ public class Level
         {
             player.Move(aDir);
         }
-       
+
         
-        if(CheckBoxGoalLocations())
+
+
+        if (CheckBoxGoalLocations())
         {
             complete = true;
         }
@@ -123,8 +126,9 @@ public class Level
     {
         if (moveNumber > 0)
         {
-            Movement lastMove = moveRecorder.GetLastMove(moveNumber);
-            levelData[0].SetLocation(lastMove.GetStartingLocation());
+            List<IEntity> data = moveRecorder.GetLastMove(moveNumber);
+            levelData = null;
+            levelData = data;
             moveNumber--;
         }
     }
@@ -133,8 +137,7 @@ public class Level
     {
         if(moveNumber < maxMoveNumber)
         {
-            Movement nextMove = moveRecorder.GetNextMove(moveNumber);
-            levelData[0].SetLocation(nextMove.GetEndingLocation());
+            levelData = moveRecorder.GetLastMove(moveNumber);
             moveNumber++;
         }
         

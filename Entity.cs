@@ -225,4 +225,10 @@ public class Entity :  IEntity
         }
     }
 
+    public IEntity Clone()
+    {
+        IEntity newEnt = new Entity(type);
+        newEnt.SetLocation(new Location(location.x, location.y));
+        return newEnt;
+    }
 }

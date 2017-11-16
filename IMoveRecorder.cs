@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 public interface IMoveRecorder
 {
-    Movement GetLastMove(int moveNumber);
-    Movement GetNextMove(int moveNumeber);
-    List<Movement> GetMoveHistory();
-    void AddNewMove(Movement aMove);
+    List<IEntity> GetLastMove(int moveNumber);
+    List<IEntity> GetNextMove(int moveNumeber);
+    List<List<IEntity>> GetMoveHistory();
+    void AddNewMove(List<IEntity> levelData);
 }

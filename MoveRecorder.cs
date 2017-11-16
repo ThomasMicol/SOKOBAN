@@ -1,31 +1,34 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class MoveRecorder : IMoveRecorder
 {
-    protected List<Movement> myMoves = new List<Movement>();
-    protected int numberOfMoves;
+    protected List<List<IEntity>> myMoves = new List<List<IEntity>>();
 
-    public Movement GetLastMove(int moveNumber)
+    public List<IEntity> GetLastMove(int moveNumber)
     {
         return myMoves[moveNumber - 1];
     }
 
-    public Movement GetNextMove(int moveNumber)
+    public List<IEntity> GetNextMove(int moveNumber)
     {
-        {
-            return myMoves[moveNumber];
-        }
+        return myMoves[moveNumber];
     }
 
-    public List<Movement> GetMoveHistory()
+    public List<List<IEntity>> GetMoveHistory()
     {
         return myMoves;
     }
 
-    public void AddNewMove(Movement aMove)
+    public void AddNewMove(int moveNumber, List<IEntity> levelData)
     {
-        myMoves.Insert(numberOfMoves, aMove);
-        numberOfMoves = myMoves.Count;
+        List<IEntity> l = new List<IEntity>();
+        foreach(IEntity e in levelData)
+        {
+            l.Add(e.Clone());
+        }
+        myMoves.Insert(moveNumber, l);
+        
     }
 
 

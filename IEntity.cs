@@ -14,6 +14,7 @@ public interface IEntity
     void AttachNewObserver(IEntity observer);
     void DetachObserver(IEntity observer);
     void Notify();
+    IEntity Clone();
 
 
 }

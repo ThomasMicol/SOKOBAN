@@ -16,3 +16,13 @@ S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment1 -
 \\ADFSSTUD2\r-u\thm0275\WindowsSettings\Desktop\C# Final\bin\Debug\Assignment1 - Thomas Micol.exe
 \\ADFSSTUD2\r-u\thm0275\WindowsSettings\Desktop\C# Final\bin\Debug\Assignment1 - Thomas Micol.pdb
 \\ADFSSTUD2\r-u\thm0275\WindowsSettings\Desktop\C# Final\obj\Debug\Assignment1___Thomas_Micol.Form1.resources
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1 - Thomas Micol.csprojResolveAssemblyReference.cache
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1___Thomas_Micol.Form1.resources
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1___Thomas_Micol.Properties.Resources.resources
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1 - Thomas Micol.csproj.GenerateResource.Cache
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1 - Thomas Micol.csproj.CoreCompileInputs.cache
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1 - Thomas Micol.exe
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\obj\Debug\Assignment1 - Thomas Micol.pdb
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\bin\Debug\Assignment1 - Thomas Micol.exe.config
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\bin\Debug\Assignment1 - Thomas Micol.exe
+S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\bin\Debug\Assignment1 - Thomas Micol.pdb

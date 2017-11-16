@@ -3,7 +3,7 @@
 public class GameController
 {
     protected IView theView;
-    protected Level theLevel;
+    public Level theLevel;
     protected IFileHandlerAdapter fileHandlerAdapter;
     protected bool isPlaying;
 
@@ -21,6 +21,9 @@ public class GameController
         {
             isPlaying = true;
             theLevel.SetMoveRecorder(new MoveRecorder());
+            theView.ClearForm();
+            theView.DrawGameControls();
+            theView.RedrawLevel();
         }
     }
 
@@ -52,19 +55,19 @@ public class GameController
     public void MovePlayer(Directions aDir)
     {
         theLevel.MovePlayer(aDir);
-        theView.Redraw();
+        theView.RedrawLevel();
     }
 
     public void UndoMove()
     {
         theLevel.UndoMove();
-        theView.Redraw();
+        theView.RedrawLevel();
     }
 
     public void RedoMove()
     {
         theLevel.RedoMove();
-        theView.Redraw();
+        theView.RedrawLevel();
     }
 
     public bool CheckLevelComplete()
@@ -74,16 +77,22 @@ public class GameController
 
     protected bool CheckLevelReady()
     {
-        if(theLevel.CheckLevelDataLength())
+        if(theLevel != null)
         {
-            return true;
+            if (theLevel.CheckLevelDataLength())
+            {
+                return true;
+            }
+            else
+            {
+                theView.DisplaySystemMessage("The level save is corrupt");
+                theLevel = null;
+                return false;
+            }
         }
-        else
-        {
-            theView.DisplaySystemMessage("The level save is corrupt");
-            theLevel = null;
-            return false;
-        }
+        return false;
+        
+        
     }
 
 

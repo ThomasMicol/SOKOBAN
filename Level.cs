@@ -4,10 +4,11 @@ public class Level
 {
     protected int Id;
     protected int moveNumber = 0;
+    protected int maxMoveNumber = 0;
     protected int rowWidth;
     protected int columnHeight;
     protected bool complete;
-    protected Entity[] levelData;
+    protected List<IEntity> levelData = new List<IEntity>();
     protected IMoveRecorder moveRecorder;
     private int arrayAccession;
 
@@ -17,25 +18,38 @@ public class Level
         rowWidth = width;
         columnHeight = height;
         int projectedEntityCount = (rowWidth * columnHeight);
-        levelData = new Entity[projectedEntityCount];
         arrayAccession = 0;
 
     }
+
+    public int GetRowWidth()
+    {
+        return rowWidth;
+    }
+
+    public int GetColumnHeight()
+    {
+        return columnHeight;
+    }
+    
 
     public void SetMoveRecorder(IMoveRecorder aMoveRecorder)
     {
         moveRecorder = aMoveRecorder;
     }
 
-    public void AddEntityToLevelData(Entity anEntity)
+    public void AddEntityToLevelData(IEntity anEntity)
     {
-        levelData[arrayAccession] = anEntity;
-        arrayAccession++;
+        if(anEntity.GetEntityType() != EntityTypes.Player && anEntity.GetEntityType() != EntityTypes.Floor && anEntity.GetEntityType() != EntityTypes.Void)
+        {
+            levelData[0].AttachNewObserver(anEntity);
+        }
+        levelData.Add(anEntity);
     }
 
     public bool CheckLevelDataLength()
     {
-        if(levelData.Length == (rowWidth * columnHeight))
+        if (levelData.Count == (rowWidth * columnHeight)) 
         {
             return true;
         }else
@@ -46,41 +60,84 @@ public class Level
 
     public void MovePlayer(Directions aDir)
     {
-        Entity player = levelData[0];
-        Entity entityWhereImMovingTo = GetEntityAt(FindTargetLocation(player, aDir));
+        IEntity player = levelData[0];
+        IEntity entityWhereImMovingTo = GetEntityAt(FindTargetLocation(player, aDir));
         Location playerLocation = new Location(player.GetLocation().x, player.GetLocation().y);
-        Location entityLocation = new Location(entityWhereImMovingTo.GetLocation().x, entityWhereImMovingTo.GetLocation().y);
-        //Location potentialPushLocation = new Location(pushLocationEntity.GetLocation().x, pushLocationEntity.GetLocation().y);
-        moveRecorder.AddNewMove(new Movement(playerLocation, entityLocation));
-        if (entityWhereImMovingTo.GetEntityType() == EntityTypes.MovableBlock)
+        if (entityWhereImMovingTo != null)
         {
-            Entity pushLocationEntity = GetEntityAt(FindTargetLocation(entityWhereImMovingTo, aDir));
-            player.Move(aDir, entityWhereImMovingTo, pushLocationEntity);
+            Location entityLocation = new Location(entityWhereImMovingTo.GetLocation().x, entityWhereImMovingTo.GetLocation().y);
+            moveRecorder.AddNewMove(new Movement(playerLocation, entityLocation));
+            if(moveNumber == maxMoveNumber)
+            {
+                moveNumber++;
+                maxMoveNumber++;
+            }
+            else
+            {
+                moveNumber++;
+            }
+            
+            if (entityWhereImMovingTo.GetEntityType() == EntityTypes.GoalTile)
+            {
+                entityWhereImMovingTo = GetOverlappingEntity(entityWhereImMovingTo);
+            }
+            if (entityWhereImMovingTo.GetEntityType() == EntityTypes.MovableBlock)
+            {
+                IEntity pushLocationEntity = GetEntityAt(FindTargetLocation(entityWhereImMovingTo, aDir));
+                player.Move(aDir, entityWhereImMovingTo, pushLocationEntity);
+            }
+            else
+            {
+                player.Move(aDir, entityWhereImMovingTo);
+            }
         }
         else
         {
-            player.Move(aDir, entityWhereImMovingTo);
+            player.Move(aDir);
         }
+       
         
         if(CheckBoxGoalLocations())
         {
             complete = true;
         }
-        moveNumber++;
+        
+    }
+
+    protected IEntity GetOverlappingEntity(IEntity e)
+    {
+        foreach(IEntity i in levelData)
+        {
+            if(i.GetLocation().x == e.GetLocation().x && i.GetLocation().y == e.GetLocation().y)
+            {
+                if(i.GetEntityType() != e.GetEntityType())
+                {
+                    return i;
+                }
+            }
+        }
+        return null;
     }
 
     public void UndoMove()
     {
-        Movement lastMove = moveRecorder.GetLastMove(moveNumber);
-        levelData[0].SetLocation(lastMove.GetStartingLocation());
-        moveNumber--;
+        if (moveNumber > 0)
+        {
+            Movement lastMove = moveRecorder.GetLastMove(moveNumber);
+            levelData[0].SetLocation(lastMove.GetStartingLocation());
+            moveNumber--;
+        }
     }
 
     public void RedoMove()
     {
-        Movement nextMove = moveRecorder.GetNextMove(moveNumber);
-        levelData[0].SetLocation(nextMove.GetEndingLocation());
-        moveNumber++;
+        if(moveNumber < maxMoveNumber)
+        {
+            Movement nextMove = moveRecorder.GetNextMove(moveNumber);
+            levelData[0].SetLocation(nextMove.GetEndingLocation());
+            moveNumber++;
+        }
+        
     }
 
     public bool IsComplete()
@@ -88,19 +145,19 @@ public class Level
         return complete;
     }
 
-    public Entity[] GetLevelData()
+    public List<IEntity> GetLevelData()
     {
         return levelData;
     }
 
     protected bool CheckBoxGoalLocations()
     {
-        List<Entity> myBoxes = GetAllMovableBlocks();
-        List<Entity> myGoals = GetAllGoals();
+        List<IEntity> myBoxes = GetAllMovableBlocks();
+        List<IEntity> myGoals = GetAllGoals();
         bool levelIsComplete = true;
-        foreach(Entity aBox in myBoxes)
+        foreach(IEntity aBox in myBoxes)
         {
-            foreach(Entity aGoal in myGoals)
+            foreach(IEntity aGoal in myGoals)
             {
                 
                 if(aBox.GetLocation().x == aGoal.GetLocation().x && aBox.GetLocation().y == aGoal.GetLocation().y)
@@ -115,31 +172,25 @@ public class Level
         return levelIsComplete;
     }
 
-    protected Entity GetEntityAt(Location targetLocation)
+    protected IEntity GetEntityAt(Location targetLocation)
     {
-        Entity backup = null;
-        foreach(Entity anEntity in levelData)
+        IEntity backup = null;
+        foreach(IEntity anEntity in levelData)
         {
             Location anEntLocation = anEntity.GetLocation();
             if(anEntLocation.x == targetLocation.x && anEntLocation.y == targetLocation.y)
             {
-                if(anEntity.GetEntityType() == EntityTypes.MovableBlock || anEntity.GetEntityType() == EntityTypes.Wall)
-                {
-                    return anEntity;
-                }
-                else
-                {
-                    backup = anEntity;
-                }
+                return anEntity; 
             }
         }
         return backup;
+        
     }
 
-    protected List<Entity> GetAllMovableBlocks()
+    protected List<IEntity> GetAllMovableBlocks()
     {
-        List<Entity> myBoxes = new List<Entity>();
-        foreach(Entity anEntity in levelData)
+        List<IEntity> myBoxes = new List<IEntity>();
+        foreach(IEntity anEntity in levelData)
         {
             if(anEntity.GetEntityType() == EntityTypes.MovableBlock)
             {
@@ -149,10 +200,10 @@ public class Level
         return myBoxes;
     }
 
-    protected List<Entity> GetAllGoals()
+    protected List<IEntity> GetAllGoals()
     {
-        List<Entity> myGoals = new List<Entity>();
-        foreach(Entity anEntity in levelData)
+        List<IEntity> myGoals = new List<IEntity>();
+        foreach(IEntity anEntity in levelData)
         {
             if(anEntity.GetEntityType() == EntityTypes.GoalTile)
             {
@@ -162,7 +213,7 @@ public class Level
         return myGoals;
     }
 
-    protected Location FindTargetLocation(Entity startPoint, Directions aDir)
+    protected Location FindTargetLocation(IEntity startPoint, Directions aDir)
     {
         Location anEntityLocation = startPoint.GetLocation();
 
@@ -193,9 +244,9 @@ public class Level
 
     }
 
-    protected Entity FindTargetEntity(Location targetLocation)
+    protected IEntity FindTargetEntity(Location targetLocation)
     {
-        foreach (Entity anEntity in levelData)
+        foreach (IEntity anEntity in levelData)
         {
             if (anEntity.GetLocation() == targetLocation)
             {

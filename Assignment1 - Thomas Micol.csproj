@@ -58,9 +58,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GameController.cs" />
+    <Compile Include="IEntity.cs" />
     <Compile Include="IFileHandler.cs" />
     <Compile Include="IFileHandlerAdapter.cs" />
     <Compile Include="IMoveRecorder.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Location.cs" />

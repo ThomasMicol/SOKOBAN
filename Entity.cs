@@ -1,10 +1,14 @@
+using Assignment1___Thomas_Micol;
 using System;
+using System.Collections.Generic;
 
-public class Entity
+public class Entity :  IEntity
 {
     protected int entityId;
     protected Location location;
     protected EntityTypes type;
+    protected List<IEntity> myObservers = new List<IEntity>();
+
 
     public Entity(EntityTypes aType)
     {
@@ -24,7 +28,7 @@ public class Entity
 
     public void SetLocationY(Directions aDir)
     {
-        if (aDir == Directions.RIGHT)
+        if (aDir == Directions.DOWN)
         {
             location.y++;
         }
@@ -64,7 +68,7 @@ public class Entity
         return type;
     }
 
-    public void Move(Directions aDir, Entity targetEntity, Entity potentialPushToEntity)
+    public void Move(Directions aDir, IEntity targetEntity, IEntity potentialPushToEntity)
     {
 
         if(aDir == Directions.UP || aDir == Directions.DOWN)
@@ -77,7 +81,7 @@ public class Entity
         }
     }
 
-    public void Move(Directions aDir, Entity targetEntity)
+    public void Move(Directions aDir, IEntity targetEntity)
     {
 
         if (aDir == Directions.UP || aDir == Directions.DOWN)
@@ -90,7 +94,7 @@ public class Entity
         }
     }
 
-    private void HandleXMovement(Directions aDir, Entity targetEntity)
+    private void HandleXMovement(Directions aDir, IEntity targetEntity)
     {
         if (targetEntity.GetIsSolid() == false)
         {
@@ -110,7 +114,7 @@ public class Entity
         }
     }
 
-    private void HandleYMovement(Directions aDir, Entity targetEntity)
+    private void HandleYMovement(Directions aDir, IEntity targetEntity)
     {
         if (targetEntity.GetIsSolid() == false)
         {
@@ -143,7 +147,7 @@ public class Entity
         }
     }
 
-    protected void HandleXMovement(Directions aDir, Entity targetEntity, Entity potentialPushToEntity)
+    protected void HandleXMovement(Directions aDir, IEntity targetEntity, IEntity potentialPushToEntity)
     {
         if(targetEntity.GetIsSolid() == false){
             SetLocationX(aDir);
@@ -162,7 +166,7 @@ public class Entity
 
     }
 
-    protected void HandleYMovement(Directions aDir, Entity targetEntity, Entity potentialPushToEntity)
+    protected void HandleYMovement(Directions aDir, IEntity targetEntity, IEntity potentialPushToEntity)
     {
         if(targetEntity.GetIsSolid() == false){
             SetLocationY(aDir);
@@ -195,6 +199,30 @@ public class Entity
     protected void HandleYMovement(Directions aDir)
     {
         SetLocationY(aDir);
+    }
+
+    public void AttachNewObserver(IEntity observer)
+    {
+        myObservers.Add(observer);
+    }
+
+    public void DetachObserver(IEntity observer)
+    {
+        foreach(IEntity o in myObservers)
+        {
+            if(o == observer)
+            {
+                myObservers.Remove(o);
+            }
+        }
+    }
+
+    public void Notify()
+    {
+        foreach(IObserver o in myObservers)
+        {
+            o.Update();
+        }
     }
 
 }

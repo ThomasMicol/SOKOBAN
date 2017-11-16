@@ -12,7 +12,9 @@ public class MoveRecorder : IMoveRecorder
 
     public Movement GetNextMove(int moveNumber)
     {
-        return myMoves[moveNumber];
+        {
+            return myMoves[moveNumber];
+        }
     }
 
     public List<Movement> GetMoveHistory()
@@ -22,7 +24,7 @@ public class MoveRecorder : IMoveRecorder
 
     public void AddNewMove(Movement aMove)
     {
-        myMoves.Add(aMove);
+        myMoves.Insert(numberOfMoves, aMove);
         numberOfMoves = myMoves.Count;
     }
 

@@ -14,9 +14,10 @@ public class FileHandlerAdapter : IFileHandlerAdapter
         aLevel.SetMapDimensions(3, 5);
         aLevel.SetMoveRecorder(new MoveRecorder());
 
-        Entity player = new Entity(EntityTypes.Player);
+        IEntity player = new Entity(EntityTypes.Player);
         player.SetLocation(new Location(1, 3));
         aLevel.AddEntityToLevelData(player);
+
         //for(int i = 0; i < 5; i++)
         //{
         //    for(int x = 0; x < 3; x++)

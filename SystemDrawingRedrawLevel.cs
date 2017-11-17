@@ -11,12 +11,16 @@ namespace Assignment1___Thomas_Micol
     {
         public override void RedrawLevel()
         {
-            SolidBrush brush = new System.Drawing.SolidBrush(System.Drawing.Color.White);
+            int windowWidth = 848;
+            int windowHeight = 520;
+            int gridWidth = 2;
+            SolidBrush brush = new SolidBrush(Color.White);
+            SolidBrush gridLine = new SolidBrush(Color.Black);
             Graphics graphic = this.CreateGraphics();
-            graphic.FillRectangle(brush, new Rectangle(31, 20, 848, 520));
+            graphic.FillRectangle(brush, new Rectangle(31, 20, windowWidth, windowHeight));
             Level g = theCtrl.theLevel;
-            int tileWidth = 848 / g.GetRowWidth();
-            int tileHeight = 520 / g.GetColumnHeight();
+            int tileWidth = windowWidth / g.GetRowWidth();
+            int tileHeight = windowHeight / g.GetColumnHeight();
             List<IEntity> l = g.GetLevelData();
             foreach (Entity e in l)
             {
@@ -42,6 +46,8 @@ namespace Assignment1___Thomas_Micol
                     brush.Color = Color.Blue;
                 }
                 graphic.FillRectangle(brush, new Rectangle(31 + (myLoc.x * tileWidth), 20 + (myLoc.y * tileHeight), tileWidth, tileHeight));
+                graphic.FillRectangle(gridLine, new Rectangle(31 + (myLoc.x * tileWidth), 20 + (myLoc.y * tileHeight), gridWidth, tileHeight));
+                graphic.FillRectangle(gridLine, new Rectangle(31 + (myLoc.x * tileWidth), 20 + (myLoc.y * tileHeight), tileWidth, gridWidth));
             }
         }
     }

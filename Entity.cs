@@ -40,7 +40,7 @@ public class Entity :  IEntity
 
     public void SetLocationX(Directions aDir)
     {
-        if (aDir == Directions.DOWN)
+        if (aDir == Directions.RIGHT)
         {
             location.x++;
         }
@@ -175,15 +175,24 @@ public class Entity :  IEntity
         {
             if(targetEntity.GetEntityType() == EntityTypes.MovableBlock)
             {
-                if(potentialPushToEntity.GetIsSolid())
+                if (potentialPushToEntity != null)
                 {
-                    return;
+                    if (potentialPushToEntity.GetIsSolid())
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        targetEntity.Move(aDir);
+                        SetLocationY(aDir);
+                    }
                 }
                 else
                 {
                     targetEntity.Move(aDir);
                     SetLocationY(aDir);
                 }
+                
                 
             }else{
                 return;

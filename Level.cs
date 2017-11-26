@@ -47,13 +47,7 @@ public class Level
 
     public bool CheckLevelDataLength()
     {
-        if (levelData.Count == (rowWidth * columnHeight)) 
-        {
-            return true;
-        }else
-        {
-            return false;
-        }
+        return true;
     }
 
     public void MovePlayer(Directions aDir)
@@ -78,7 +72,10 @@ public class Level
             
             if (entityWhereImMovingTo.GetEntityType() == EntityTypes.GoalTile)
             {
-                entityWhereImMovingTo = GetOverlappingEntity(entityWhereImMovingTo);
+                if (GetOverlappingEntity(entityWhereImMovingTo) != null)
+                {
+                    player.Move(aDir);
+                }
             }
             if (entityWhereImMovingTo.GetEntityType() == EntityTypes.MovableBlock)
             {

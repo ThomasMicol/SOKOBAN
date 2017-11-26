@@ -10,7 +10,7 @@ namespace Assignment1___Thomas_Micol
     {
         public override void RedrawLevel()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

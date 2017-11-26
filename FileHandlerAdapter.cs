@@ -11,7 +11,7 @@ public class FileHandlerAdapter : IFileHandlerAdapter
     public Level RequestLevel(string filePath)
     {
         Level aLevel = new Level();
-        aLevel.SetMapDimensions(3, 5);
+        aLevel.SetMapDimensions(8, 8);
         aLevel.SetMoveRecorder(new MoveRecorder());
 
         IEntity player = new Entity(EntityTypes.Player);
@@ -27,29 +27,48 @@ public class FileHandlerAdapter : IFileHandlerAdapter
         //        aLevel.AddEntityToLevelData(floor);
         //    }
         //}
-        for (int i = 0; i < 5; i++)
+        for(int levelHeight = 0; levelHeight < aLevel.GetColumnHeight(); levelHeight++)
         {
-            Entity leftWallEnt = new Entity(EntityTypes.Wall);
-            Entity rightWallEnt = new Entity(EntityTypes.Wall);
-            leftWallEnt.SetLocation(new Location(0, i));
-            rightWallEnt.SetLocation(new Location(2, i));
-            aLevel.AddEntityToLevelData(leftWallEnt);
-            aLevel.AddEntityToLevelData(rightWallEnt);
+            for (int levelWidth = 0; levelWidth < aLevel.GetRowWidth(); levelWidth++)
+            {
+                if (levelHeight == 0 || levelWidth == 0 || levelWidth == aLevel.GetRowWidth() - 1 || levelHeight == aLevel.GetColumnHeight() - 1)
+                {
+                    IEntity sideWall = new Entity(EntityTypes.Wall);
+                    sideWall.SetLocation(new Location(levelWidth, levelHeight));
+                    aLevel.AddEntityToLevelData(sideWall);
+
+                }
+                
+            }
         }
-        Entity topMiddleWall = new Entity(EntityTypes.Wall);
-        Entity bottomMiddleWall = new Entity(EntityTypes.Wall);
-        topMiddleWall.SetLocation(new Location(1,0));
-        bottomMiddleWall.SetLocation(new Location(1,4));
-        aLevel.AddEntityToLevelData(bottomMiddleWall);
-        aLevel.AddEntityToLevelData(topMiddleWall);
+        
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    Entity leftWallEnt = new Entity(EntityTypes.Wall);
+        //    Entity rightWallEnt = new Entity(EntityTypes.Wall);
+        //    leftWallEnt.SetLocation(new Location(0, i));
+        //    rightWallEnt.SetLocation(new Location(2, i));
+        //    aLevel.AddEntityToLevelData(leftWallEnt);
+        //    aLevel.AddEntityToLevelData(rightWallEnt);
+        //}
+        //Entity topMiddleWall = new Entity(EntityTypes.Wall);
+        //Entity bottomMiddleWall = new Entity(EntityTypes.Wall);
+        //topMiddleWall.SetLocation(new Location(1,0));
+        //bottomMiddleWall.SetLocation(new Location(1,4));
+        //aLevel.AddEntityToLevelData(bottomMiddleWall);
+        //aLevel.AddEntityToLevelData(topMiddleWall);
 
         Entity goal = new Entity(EntityTypes.GoalTile);
-        goal.SetLocation(new Location(1, 1));
+        goal.SetLocation(new Location(5, 4));
         aLevel.AddEntityToLevelData(goal);
 
         Entity box = new Entity(EntityTypes.MovableBlock);
-        box.SetLocation(new Location(1, 2));
+        box.SetLocation(new Location(4, 2));
         aLevel.AddEntityToLevelData(box);
+
+        Entity box1 = new Entity(EntityTypes.MovableBlock);
+        box1.SetLocation(new Location(4, 5));
+        aLevel.AddEntityToLevelData(box1);
 
         return aLevel;
 

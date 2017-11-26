@@ -60,15 +60,7 @@ public class Level
         {
             Location entityLocation = new Location(entityWhereImMovingTo.GetLocation().x, entityWhereImMovingTo.GetLocation().y);
             
-            if(moveNumber == maxMoveNumber)
-            {
-                moveNumber++;
-                maxMoveNumber++;
-            }
-            else
-            {
-                moveNumber++;
-            }
+            
             
             if (entityWhereImMovingTo.GetEntityType() == EntityTypes.GoalTile)
             {
@@ -89,6 +81,15 @@ public class Level
         }
         else
         {
+            if (moveNumber == maxMoveNumber)
+            {
+                moveNumber++;
+                maxMoveNumber++;
+            }
+            else
+            {
+                moveNumber++;
+            }
             player.Move(aDir);
         }
 
@@ -100,6 +101,11 @@ public class Level
             complete = true;
         }
         
+    }
+
+    public int GetMoveCount()
+    {
+        return moveNumber;
     }
 
     protected IEntity GetOverlappingEntity(IEntity e)

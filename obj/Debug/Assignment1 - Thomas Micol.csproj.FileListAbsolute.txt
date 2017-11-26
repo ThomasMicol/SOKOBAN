@@ -26,3 +26,12 @@ S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\
 S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\bin\Debug\Assignment1 - Thomas Micol.exe.config
 S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\bin\Debug\Assignment1 - Thomas Micol.exe
 S:\OneDrive\Documents\Year 3\Semester 1\.NET Programming Practices\Assignment 2\Source\bin\Debug\Assignment1 - Thomas Micol.pdb
+C:\Users\thm0275\Source\Repos\SOKOBAN\bin\Debug\Assignment1 - Thomas Micol.exe.config
+C:\Users\thm0275\Source\Repos\SOKOBAN\obj\Debug\Assignment1 - Thomas Micol.exe
+C:\Users\thm0275\Source\Repos\SOKOBAN\obj\Debug\Assignment1 - Thomas Micol.pdb
+C:\Users\thm0275\Source\Repos\SOKOBAN\bin\Debug\Assignment1 - Thomas Micol.exe
+C:\Users\thm0275\Source\Repos\SOKOBAN\bin\Debug\Assignment1 - Thomas Micol.pdb
+C:\Users\thm0275\Source\Repos\SOKOBAN\obj\Debug\Assignment1 - Thomas Micol.csprojResolveAssemblyReference.cache
+C:\Users\thm0275\Source\Repos\SOKOBAN\obj\Debug\Assignment1___Thomas_Micol.Form1.resources
+C:\Users\thm0275\Source\Repos\SOKOBAN\obj\Debug\Assignment1___Thomas_Micol.Properties.Resources.resources
+C:\Users\thm0275\Source\Repos\SOKOBAN\obj\Debug\Assignment1 - Thomas Micol.csproj.GenerateResource.Cache

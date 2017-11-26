@@ -11,7 +11,7 @@ public class FileHandlerAdapter : IFileHandlerAdapter
     public Level RequestLevel(string filePath)
     {
         Level aLevel = new Level();
-        aLevel.SetMapDimensions(8, 8);
+        aLevel.SetMapDimensions(18, 80);
         aLevel.SetMoveRecorder(new MoveRecorder());
 
         IEntity player = new Entity(EntityTypes.Player);

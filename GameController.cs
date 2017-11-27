@@ -32,9 +32,6 @@ public class GameController
         if(CheckLevelReady())
         {
             isPlaying = true;
-            theView.ClearForm();
-            theView.DrawGameControls();
-            theView.RedrawLevel();
         }
     }
 

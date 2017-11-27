@@ -22,9 +22,6 @@ namespace Assignment1___Thomas_Micol
             int tileWidth = windowWidth / g.GetRowWidth();
             int tileHeight = windowHeight / g.GetColumnHeight();
             List<IEntity> l = g.GetLevelData();
-            int moveNum = g.GetMoveCount();
-            DrawMoveCount(moveNum);
-
             foreach (Entity e in l)
             {
                 Location myLoc = e.GetLocation();
@@ -52,11 +49,6 @@ namespace Assignment1___Thomas_Micol
                 graphic.FillRectangle(gridLine, new Rectangle(31 + (myLoc.x * tileWidth), 20 + (myLoc.y * tileHeight), gridWidth, tileHeight));
                 graphic.FillRectangle(gridLine, new Rectangle(31 + (myLoc.x * tileWidth), 20 + (myLoc.y * tileHeight), tileWidth, gridWidth));
             }
-        }
-
-        protected void DrawMoveCount(int moveCount)
-        {
-            this.moveNum.Text = "Move Count: " + moveCount.ToString();
         }
     }
 }

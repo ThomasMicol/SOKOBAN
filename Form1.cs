@@ -30,8 +30,6 @@ namespace Assignment1___Thomas_Micol
 
         protected Button btn_exit;
 
-        protected Label moveNum;
-
 
         protected List<Control> myElements = new List<Control>();
 
@@ -108,17 +106,6 @@ namespace Assignment1___Thomas_Micol
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.exit_Click);
 
-            this.moveNum = new System.Windows.Forms.Label();
-            this.moveNum.AutoSize = true;
-            this.moveNum.Location = new System.Drawing.Point(343, 615);
-            this.moveNum.Name = "moveNum";
-            this.moveNum.Size = new System.Drawing.Size(93, 34);
-            this.moveNum.TabIndex = 0;
-            this.moveNum.Text = "Move Count: ";
-            
-
-
-
 
             this.Controls.Add(this.btn_moveUp);
             this.Controls.Add(this.btn_moveLeft);
@@ -129,7 +116,6 @@ namespace Assignment1___Thomas_Micol
             this.Controls.Add(this.btn_resetLevel);
             this.Controls.Add(this.btn_saveState);
             this.Controls.Add(this.btn_exit);
-            this.Controls.Add(this.moveNum);
 
             this.myElements.Add(this.btn_moveUp);
             this.myElements.Add(this.btn_moveLeft);

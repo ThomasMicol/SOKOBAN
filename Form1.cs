@@ -24,11 +24,12 @@ namespace Assignment1___Thomas_Micol
 
         protected Button btn_undoMove;
         protected Button btn_redoMove;
-
-        protected Button btn_resetLevel;
+       
         protected Button btn_saveState;
 
         protected Button btn_exit;
+
+        protected Label lbl_moveCount;
 
 
         protected List<Control> myElements = new List<Control>();
@@ -48,7 +49,6 @@ namespace Assignment1___Thomas_Micol
             this.btn_moveRight = new System.Windows.Forms.Button();
             this.btn_undoMove = new System.Windows.Forms.Button();
             this.btn_redoMove = new System.Windows.Forms.Button();
-            this.btn_resetLevel = new System.Windows.Forms.Button();
             this.btn_saveState = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
 
@@ -88,12 +88,6 @@ namespace Assignment1___Thomas_Micol
             this.btn_redoMove.UseVisualStyleBackColor = true;
             this.btn_redoMove.Click += new System.EventHandler(this.redoMove_Click);
 
-            this.btn_resetLevel.Location = new System.Drawing.Point(131, 602 - 36);
-            this.btn_resetLevel.Size = new System.Drawing.Size(93, 34);
-            this.btn_resetLevel.Text = "Reset Level";
-            this.btn_resetLevel.UseVisualStyleBackColor = true;
-            this.btn_resetLevel.Click += new System.EventHandler(this.resetLevel_Click);
-
             this.btn_saveState.Location = new System.Drawing.Point(131, 602);
             this.btn_saveState.Size = new System.Drawing.Size(93, 34);
             this.btn_saveState.Text = "Save Game";
@@ -106,6 +100,15 @@ namespace Assignment1___Thomas_Micol
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.exit_Click);
 
+            this.lbl_moveCount = new System.Windows.Forms.Label();
+            this.lbl_moveCount.AutoSize = true;
+            this.lbl_moveCount.Location = new System.Drawing.Point(381, 602);
+            this.lbl_moveCount.Name = "lbl_moveCount";
+            this.lbl_moveCount.Size = new System.Drawing.Size(35, 13);
+            this.lbl_moveCount.TabIndex = 0;
+            this.lbl_moveCount.Text = "Move Count: 0";
+
+
 
             this.Controls.Add(this.btn_moveUp);
             this.Controls.Add(this.btn_moveLeft);
@@ -113,9 +116,9 @@ namespace Assignment1___Thomas_Micol
             this.Controls.Add(this.btn_moveRight);
             this.Controls.Add(this.btn_undoMove);
             this.Controls.Add(this.btn_redoMove);
-            this.Controls.Add(this.btn_resetLevel);
             this.Controls.Add(this.btn_saveState);
             this.Controls.Add(this.btn_exit);
+            this.Controls.Add(this.lbl_moveCount);
 
             this.myElements.Add(this.btn_moveUp);
             this.myElements.Add(this.btn_moveLeft);
@@ -123,7 +126,6 @@ namespace Assignment1___Thomas_Micol
             this.myElements.Add(this.btn_moveRight);
             this.myElements.Add(this.btn_undoMove);
             this.myElements.Add(this.btn_redoMove);
-            this.myElements.Add(this.btn_resetLevel);
             this.myElements.Add(this.btn_saveState);
             this.myElements.Add(this.btn_exit);
           
@@ -131,18 +133,14 @@ namespace Assignment1___Thomas_Micol
 
         private void exit_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Close();
         }
 
         private void saveGame_Click(object sender, EventArgs e)
         {
             theCtrl.SaveLevelState();
         }
-
-        private void resetLevel_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private void redoMove_Click(object sender, EventArgs e)
         {
@@ -256,6 +254,11 @@ namespace Assignment1___Thomas_Micol
         private void NewGame_Click(object sender, EventArgs e)
         {
             theCtrl.StartNewGame();
+        }
+
+        public void Run()
+        {
+            Application.Run(this);
         }
     }
 }

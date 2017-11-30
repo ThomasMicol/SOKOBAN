@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Assignment1___Thomas_Micol
 {
-    class SystemDrawingRedrawLevel : Form1
+    public class SystemDrawingRedrawLevel : Form1
     {
         public override void RedrawLevel()
         {
@@ -19,6 +17,8 @@ namespace Assignment1___Thomas_Micol
             Graphics graphic = this.CreateGraphics();
             graphic.FillRectangle(brush, new Rectangle(31, 20, windowWidth, windowHeight));
             Level g = theCtrl.theLevel;
+            int moves = g.GetMoveCount();
+            this.lbl_moveCount.Text = "Move Count: " + moves.ToString();
             int tileWidth = windowWidth / g.GetRowWidth();
             int tileHeight = windowHeight / g.GetColumnHeight();
             List<IEntity> l = g.GetLevelData();

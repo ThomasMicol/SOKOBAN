@@ -16,9 +16,9 @@ namespace Assignment1___Thomas_Micol
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 frmMain = new SystemDrawingRedrawLevel();
+            IView frmMain = new SystemDrawingRedrawLevel();
             frmMain.SetController(new GameController(frmMain));
-            Application.Run(frmMain);
+            frmMain.Run();
         }
     }
 }

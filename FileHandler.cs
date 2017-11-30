@@ -13,7 +13,7 @@ public class FileHandler : IFileHandler
 
     public void SaveState(List<int> moveHistory)
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Saved");
     }
 }
 

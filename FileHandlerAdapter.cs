@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 
 public class FileHandlerAdapter : IFileHandlerAdapter
 {
@@ -17,16 +17,7 @@ public class FileHandlerAdapter : IFileHandlerAdapter
         IEntity player = new Entity(EntityTypes.Player);
         player.SetLocation(new Location(1, 3));
         aLevel.AddEntityToLevelData(player);
-
-        //for(int i = 0; i < 5; i++)
-        //{
-        //    for(int x = 0; x < 3; x++)
-        //    {
-        //        Entity floor = new Entity(EntityTypes.Floor);
-        //        floor.SetLocation(new Location(x, i));
-        //        aLevel.AddEntityToLevelData(floor);
-        //    }
-        //}
+        
         for(int levelHeight = 0; levelHeight < aLevel.GetColumnHeight(); levelHeight++)
         {
             for (int levelWidth = 0; levelWidth < aLevel.GetRowWidth(); levelWidth++)
@@ -41,22 +32,6 @@ public class FileHandlerAdapter : IFileHandlerAdapter
                 
             }
         }
-        
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    Entity leftWallEnt = new Entity(EntityTypes.Wall);
-        //    Entity rightWallEnt = new Entity(EntityTypes.Wall);
-        //    leftWallEnt.SetLocation(new Location(0, i));
-        //    rightWallEnt.SetLocation(new Location(2, i));
-        //    aLevel.AddEntityToLevelData(leftWallEnt);
-        //    aLevel.AddEntityToLevelData(rightWallEnt);
-        //}
-        //Entity topMiddleWall = new Entity(EntityTypes.Wall);
-        //Entity bottomMiddleWall = new Entity(EntityTypes.Wall);
-        //topMiddleWall.SetLocation(new Location(1,0));
-        //bottomMiddleWall.SetLocation(new Location(1,4));
-        //aLevel.AddEntityToLevelData(bottomMiddleWall);
-        //aLevel.AddEntityToLevelData(topMiddleWall);
 
         Entity goal = new Entity(EntityTypes.GoalTile);
         goal.SetLocation(new Location(5, 4));
@@ -78,6 +53,10 @@ public class FileHandlerAdapter : IFileHandlerAdapter
 
     public bool SendLevel(Level aLevel)
     {
-        throw new NotImplementedException();
+        //Conversion would take place here changing the
+        //incompatible data type into a compatible data type.
+
+        fileHandler.SaveState(new List<int>());
+        return true;
     }
 }

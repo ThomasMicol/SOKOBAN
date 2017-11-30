@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public class Level
@@ -29,7 +30,11 @@ public class Level
     {
         return columnHeight;
     }
-    
+
+    internal int GetMoveCount()
+    {
+        return moveNumber;
+    }
 
     public void SetMoveRecorder(IMoveRecorder aMoveRecorder)
     {
@@ -90,6 +95,8 @@ public class Level
         else
         {
             player.Move(aDir);
+            moveNumber++;
+            maxMoveNumber++;
         }
 
         
